@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Microfinance App{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the Microfinance Application!</h2>
+    <p>This is your home page.</p>
+    {% if user.is_authenticated %}
+        <p>You are logged in as {{ user.username }}. Your role: {{ user.role }}</p>
+        <p>Your full name: {{ user.full_name }}</p>
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+    {% else %}
+        <p>Please <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to continue.</p>
+    {% endif %}
+{% endblock %}

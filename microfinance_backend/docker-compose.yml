@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    env_file: .env
+    ports: ["8000:8000"]
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: dbname
+    ports:
+      - "5432:5432"   

@@ -1,0 +1,17 @@
+# microfinance_backend/requirements.txt
+
+djangorestframework>=3.14,<4.0
+gunicorn>=21.0,<22.0
+psycopg2-binary>=2.9,<3.0
+python-decouple>=3.8,<4.0
+requests>=2.31,<3.0  # For potential Mifos X API calls
+drf-yasg>=1.21,<2.0   # Optional: For API documentation (Swagger/Redoc)
+Django==5.2.3
+uvicorn
+asgiref
+python-telegram-bot~=20.0
+djangorestframework
+django-extensions
+celery
+redis
+requests

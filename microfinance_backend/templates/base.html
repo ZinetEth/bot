@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Microfinance{% endblock %}</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        .errorlist { color: red; list-style: none; padding: 0; }
+        .helptext { font-size: 0.9em; color: #666; }
+        ul.errorlist li { margin-bottom: 5px; }
+        form ul { list-style: none; padding: 0; }
+        form li { margin-bottom: 10px; }
+        form label { display: inline-block; width: 150px; text-align: right; margin-right: 10px; }
+        form input[type="text"], form input[type="password"], form input[type="email"] { width: 250px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        form button { padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        form button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{% block header_title %}Microfinance App{% endblock %}</h1>
+            <nav>
+                {% if user.is_authenticated %}
+                    Welcome, {{ user.username }} |
+                    <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a> |
+                    <a href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </nav>
+            <hr>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+            <hr>
+            <p>&copy; 2025 Microfinance App</p>
+        </footer>
+    </div>
+</body>
+</html>

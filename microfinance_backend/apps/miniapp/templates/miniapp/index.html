@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microfinance Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to integrate with Telegram's theme colors */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--tg-theme-bg-color, #f8f8f8); /* Default light gray */
+            color: var(--tg-theme-text-color, #333333); /* Default dark gray */
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .card {
+            background-color: var(--tg-theme-secondary-bg-color, #ffffff); /* Default white */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        button {
+            background-color: var(--tg-theme-button-color, #007bff); /* Default blue */
+            color: var(--tg-theme-button-text-color, #ffffff); /* Default white */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 0.75rem 1.5rem; /* px-4 py-2 */
+            font-weight: 600; /* font-semibold */
+            transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+        }
+        button:hover:not(:disabled) {
+            opacity: 0.9;
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        input {
+            background-color: var(--tg-theme-secondary-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #333333);
+            border: 1px solid var(--tg-theme-hint-color, #cccccc);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        /* Make sure these display properties are set correctly by JS,
+           but having them hidden by default for non-active views is good. */
+        #loading-view, #registration-view, #dashboard-view,
+        #success-message, #error-message {
+            display: none; /* Hidden by default, JS will manage visibility */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+    <div class="card w-full max-w-md text-center">
+        <h1 class="text-2xl font-bold mb-4">Microfinance Customer Portal</h1>
+
+        <p id="success-message" class="mt-2 p-2 rounded text-green-700 bg-green-100 hidden">Success!</p>
+        <p id="error-message" class="mt-2 p-2 rounded text-red-700 bg-red-100 hidden">Error!</p>
+
+        <div id="loading-view" class="flex flex-col items-center justify-center py-8">
+            <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p class="mt-4 text-lg" id="user-info-status">Loading user info...</p>
+        </div>
+
+        <div id="dashboard-view" class="hidden"> <h2 class="text-xl font-semibold mb-2">Your Dashboard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div class="p-4 rounded-lg bg-blue-100 text-blue-800">
+                    <h3 class="font-bold">Share Balance:</h3>
+                    <p id="dashboard-share-balance" class="text-lg">--</p> </div>
+                <div class="p-4 rounded-lg bg-green-100 text-green-800">
+                    <h3 class="font-bold">Referrals:</h3>
+                    <p id="dashboard-referral-count" class="text-lg">--</p> </div>
+            </div>
+            <div class="text-left mb-4 p-4 bg-gray-50 rounded-lg">
+                <p><b>Username:</b> <span id="dashboard-username">N/A</span></p>
+                <p><b>Phone:</b> <span id="dashboard-phone-number">N/A</span></p>
+                <p><b>Telegram User:</b> <span id="dashboard-telegram-username">N/A</span></p>
+            </div>
+
+            <button id="buySharesBtn" class="w-full mb-2">Buy Shares</button>
+            <button id="viewReferralsBtn" class="w-full mb-2">View Referrals</button>
+            <button id="kycStatusBtn" class="w-full mb-2">Check KYC Status</button>
+            <button id="withdrawCommissionBtn" class="w-full mb-2">Withdraw Commission</button>
+        </div>
+
+        <div id="registration-view" class="hidden"> <h2 class="text-xl font-semibold mb-2">Register Your Account</h2>
+            <input type="text" id="phone-number-input" placeholder="Your Phone Number (e.g., +251912345678)" class="mb-2"> <input type="text" id="referral-code-input" placeholder="Referral Code (Optional)" class="mb-2"> <button id="register-button" class="w-full">Submit Registration</button> </div>
+
+        <button id="closeWebAppBtn" class="w-full mt-4">Close Portal</button>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="/static/miniapp/js/main.js"></script>
+
+    </body>
+</html>
